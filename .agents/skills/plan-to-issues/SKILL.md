@@ -24,6 +24,25 @@ in a shell this agent can run.
 
 6. Record every issue URL from gh's output (not from memory) and reply with the list.
 
+## Approved issue shape
+
+This shape is human-approved for this repository. Reuse it without asking again unless a change is needed:
+
+```md
+Source: plan.md § <section>
+
+## Scope
+...
+
+## Done when
+- [ ] ...
+
+## Blocked by
+<actual issue numbers, or None>
+```
+
+Apply the `plan:<plan-name>` label; this plan uses `plan:morning-digest`.
+
 Closing one, with the closing comment from AGENTS.md:
 
 ```sh
