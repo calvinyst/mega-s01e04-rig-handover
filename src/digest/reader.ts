@@ -44,8 +44,10 @@ export const readNight: ReadNight = (runsDir, night) => {
 
   const entries: RunEntry[] = [];
   let badLineCount = 0;
-  for (const line of contents.split(/\r?\n/)) {
-    if (!line.trim()) continue;
+  const lines = contents === '' ? [] : contents.split(/\r?\n/);
+  // A terminal newline ends the preceding line; it does not add a blank line.
+  if (contents.endsWith('\n')) lines.pop();
+  for (const line of lines) {
     try {
       const value: unknown = JSON.parse(line);
       if (isRunEntry(value)) entries.push(value);

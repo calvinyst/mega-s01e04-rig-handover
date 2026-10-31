@@ -34,12 +34,17 @@ describe('readNight', () => {
     expect(result?.rows[4]).toMatchObject({ runs: 1, retries: 0, failures: 0, lastStatus: 'ok' });
   });
 
-  it('distinguishes missing and empty nights and ignores blank lines including CRLF', () => {
+  it('distinguishes missing and empty nights', () => {
     expect(readNight(runsDir, night)).toBeNull();
     writeFileSync(join(runsDir, `${night}.jsonl`), '');
     expect(readNight(runsDir, night)).toEqual({ rows: [], badLineCount: 0 });
-    writeFileSync(join(runsDir, `${night}.jsonl`), `\r\n  \r\n${JSON.stringify(entry)}\r\n`);
-    expect(readNight(runsDir, night)).toMatchObject({ rows: [{ job: 'job' }], badLineCount: 0 });
+  });
+
+  it.each(['\n', '\r\n'])('counts blank logical lines with %j delimiters, excluding the terminal split element', (newline) => {
+    writeFileSync(join(runsDir, `${night}.jsonl`), `${newline}  ${newline}${JSON.stringify(entry)}${newline}`);
+    expect(readNight(runsDir, night)).toMatchObject({ rows: [{ job: 'job' }], badLineCount: 2 });
+    writeFileSync(join(runsDir, `${night}.jsonl`), newline);
+    expect(readNight(runsDir, night)).toEqual({ rows: [], badLineCount: 1 });
   });
 
   it('counts malformed JSON and schema failures while retaining valid entries', () => {
