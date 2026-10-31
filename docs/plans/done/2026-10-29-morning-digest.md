@@ -1,8 +1,9 @@
 ---
 plan: morning-digest
-status: ready
+status: done
 owner: rook
 opened: 2026-10-29
+closed: 2026-10-31
 ---
 
 # Morning digest
@@ -77,3 +78,23 @@ page again with `LANE_MARKER` unset (the banner reads "no marker set") and uploa
 link. Move this plan to `docs/plans/done/` with its issue list.
 
 Done when: the preview link no longer shows the lane marker.
+
+## Issues
+
+| # | Source | Issue | Blocked by | Worker | URL |
+|---|--------|-------|------------|--------|-----|
+| 1 | § 1 | Read and aggregate nightly run logs | — | Codex · gpt-6-astra · high | [#1](https://github.com/calvinyst/mega-s01e04-rig-handover/issues/1) |
+| 2 | § 2a | Render the nightly digest page | #1 (shared types commit) | Codex · gpt-6-luna · high | [#2](https://github.com/calvinyst/mega-s01e04-rig-handover/issues/2) |
+| 3 | § 2b | Expose the digest as JSON | #1 (shared types commit) | Codex · gpt-6-luna · high | [#3](https://github.com/calvinyst/mega-s01e04-rig-handover/issues/3) |
+| 4 | § 2c | Link nightly digests from the status board | #1 (shared types commit) | Codex · gpt-6-luna · high | [#4](https://github.com/calvinyst/mega-s01e04-rig-handover/issues/4) |
+| 5 | § 2d | Test HTML and JSON digest routes | #1 (shared types commit); #2; #3 | Codex · gpt-6-luna · high | [#5](https://github.com/calvinyst/mega-s01e04-rig-handover/issues/5) |
+| 6 | § 3 | Publish and submit the HTML preview for review | #1–#5; human publication approval | Codex · gpt-6-luna · high | [#6](https://github.com/calvinyst/mega-s01e04-rig-handover/issues/6) |
+| 7 | § 4 | Remove the preview marker after review and archive the plan | #6; reviewer feedback resolved; human replacement approval | Codex · gpt-6-luna · high | [#7](https://github.com/calvinyst/mega-s01e04-rig-handover/issues/7) |
+
+Issue #6 was first closed when the preview was submitted, before review feedback arrived. It was reopened and closed after the course confirmed the reviewer had seen the preview.
+
+Preview: [public digest](https://mega-s01e04-preview.vietnam-disaster-dashboard-2025.workers.dev).
+
+Worker harness for all issues: Codex.
+
+Validation recorded before review: 22 tests passed and typecheck passed.
