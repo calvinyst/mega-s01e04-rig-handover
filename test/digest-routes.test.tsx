@@ -111,16 +111,16 @@ describe('digest routes', () => {
     addNight(
       [
         JSON.stringify({ at: '2026-10-30T23:55:00-04:00', job: 'Zebra', status: 'retry', owner: 'Sam' }),
-        JSON.stringify({ at: '2026-10-31T00:01:00-04:00', job: 'Zebra', status: 'retry', owner: 'Sam' }),
-        JSON.stringify({ at: '2026-10-31T00:03:00-04:00', job: 'Zebra', status: 'retry', owner: 'Sam' }),
-        JSON.stringify({ at: '2026-10-31T00:05:00-04:00', job: 'Zebra', status: 'retry', owner: 'Sam' }),
         JSON.stringify({
-          at: '2026-10-31T00:07:00-04:00',
+          at: '2026-10-31T00:01:00-04:00',
           job: 'Zebra',
-          status: 'fail',
+          status: 'retry',
           owner: 'Sam',
           error: '<img src=x onerror="x"> & breakfast',
         }),
+        JSON.stringify({ at: '2026-10-31T00:03:00-04:00', job: 'Zebra', status: 'retry', owner: 'Sam' }),
+        JSON.stringify({ at: '2026-10-31T00:05:00-04:00', job: 'Zebra', status: 'retry', owner: 'Sam' }),
+        JSON.stringify({ at: '2026-10-31T00:07:00-04:00', job: 'Zebra', status: 'ok', owner: 'Sam' }),
         JSON.stringify({ at: '2026-10-30T23:59:00+08:00', job: 'beta', status: 'fail', owner: 'Lee' }),
         JSON.stringify({ at: '2026-10-30T22:30:00+08:00', job: '_punct', status: 'ok', owner: 'Pat' }),
         JSON.stringify({ at: '2026-10-30T23:58:00+08:00', job: 'alpha', status: 'ok', owner: null }),
@@ -142,8 +142,8 @@ describe('digest routes', () => {
       expect(html).toContain('2026-10-30T23:58:00+08:00');
       expect(html).toContain('2026-10-30T23:55:00-04:00');
       expect(html).toContain('2026-10-31T00:07:00-04:00');
+      expect(html).toContain('<tr class="warn"><td>Zebra</td><td>Sam</td><td>5</td><td>4</td><td>ok</td>');
       expect(html).toContain('fail');
-      expect(html).toContain('<tr class="warn"><td>Zebra</td>');
       expect(html).toContain('<tr class="warn"><td>beta</td>');
       expect(html).toContain('&lt;img');
       expect(html).toContain('&amp; breakfast');
